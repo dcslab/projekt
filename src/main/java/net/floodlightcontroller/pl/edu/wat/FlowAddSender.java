@@ -32,10 +32,21 @@ public class FlowAddSender {
 
     public void simpleAdd(IOFSwitch sw, OFPacketIn pin, FloodlightContext cntx, OFPort outPort) {
 
+        //TODO: Create OFFlowMod.Builder
+
+        //TODO: Create Match
+
+        //TODO: Create Actions
+
+        //TODO: Bind match and actions with OFFlowMod.Builder
+
+        //TODO: Send FlowMod message to switch
     }
 
     public void addBasedOnPacketIn(IOFSwitch sw, OFPacketIn pin, FloodlightContext cntx, OFPort outPort) {
 
+        //TODO: Based on simpleAdd and using createMatchFromPacket method build FlowAdd message based on PacketIn.
+        //TODO: Set Idle timeout of Flow to 10 seconds and Hard timeout to 120 seconds
     }
 
     private Match createMatchFromPacket(IOFSwitch sw, OFPort inPort, FloodlightContext cntx) {
