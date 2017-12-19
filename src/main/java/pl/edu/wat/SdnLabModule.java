@@ -1,4 +1,4 @@
-package net.floodlightcontroller.pl.edu.wat;
+package pl.edu.wat;
 
 import net.floodlightcontroller.core.*;
 import net.floodlightcontroller.core.module.FloodlightModuleContext;
