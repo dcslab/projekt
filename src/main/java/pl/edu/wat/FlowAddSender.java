@@ -23,6 +23,7 @@ public class FlowAddSender {
     protected static boolean FLOWMOD_DEFAULT_MATCH_MAC = true;
     protected static boolean FLOWMOD_DEFAULT_MATCH_IP_ADDR = true;
     protected static boolean FLOWMOD_DEFAULT_MATCH_TRANSPORT = true;
+    protected static int FLOWMOD_DEFAULT_PRIORITY = 32768;
 
     private static Logger logger;
 
@@ -49,7 +50,7 @@ public class FlowAddSender {
         //TODO: Set Idle timeout of Flow to 10 seconds and Hard timeout to 120 seconds
     }
 
-    private Match createMatchFromPacket(IOFSwitch sw, OFPort inPort, FloodlightContext cntx) {
+    public Match createMatchFromPacket(IOFSwitch sw, OFPort inPort, FloodlightContext cntx) {
         // The packet in match will only contain the port number.
         // We need to add in specifics for the hosts we're routing between.
         Ethernet eth = IFloodlightProviderService.bcStore.get(cntx, IFloodlightProviderService.CONTEXT_PI_PAYLOAD);

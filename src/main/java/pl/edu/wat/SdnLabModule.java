@@ -71,21 +71,29 @@ public class SdnLabModule implements IFloodlightModule, IOFMessageListener {
     @Override
     public Command receive(IOFSwitch sw, OFMessage msg, FloodlightContext cntx) {
 
-        //Packet Out
+        //Packet Out -- section
         PacketOutSender packetOutsender = new PacketOutSender();
         packetOutsender.sendPacketOutMessage(sw);
 
         /*
-        //Flow Add
+        //Flow Add -- section
         OFPacketIn pin = (OFPacketIn) msg;
         OFPort outPort = OFPort.of(0);
-        if (pin.getInPort() == OFPort.of(1)) {
+        if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1)) {
             outPort = OFPort.of(2);
         } else {
             outPort = OFPort.of(1);
         }
         FlowAddSender flowAddSender = new FlowAddSender();
+        */
+
+        /*
+        //Simple Flow Add -- section
         flowAddSender.simpleAdd(sw, pin, cntx, outPort);
+        */
+
+        /*
+        //Packet In Flow Add -- section
         flowAddSender.addBasedOnPacketIn(sw, pin, cntx, outPort);
         */
         return Command.CONTINUE;
