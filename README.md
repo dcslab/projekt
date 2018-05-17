@@ -1,6 +1,6 @@
 Projekt bazuje na projekcie utworzonym podczas laboratoriów (floodlight-lab4). 
 
-Poszerzony jest jedynie o bazę statystyk (https://github.com/dcslab/projekt/tree/master/src/main/java/net/floodlightcontroller) na podstawie tutorialu https://floodlight.atlassian.net/wiki/spaces/floodlightcontroller/pages/21856267/How+to+Collect+Switch+Statistics+and+Compute+Bandwidth+Utilization. W rezultacie zwracane są ilości bajtów (rx, tx) wszystkich portów switcha w z góry wcześniej określonym przedziale czasowym (10s). Przedział ten można zmniejszyć, ale wpływa to wtedy na dokładność pomiaru.
+Poszerzony jest jedynie o bazę statystyk (https://github.com/dcslab/projekt/tree/master/src/main/java/net/floodlightcontroller/statistics) na podstawie tutorialu https://floodlight.atlassian.net/wiki/spaces/floodlightcontroller/pages/21856267/How+to+Collect+Switch+Statistics+and+Compute+Bandwidth+Utilization. W rezultacie zwracane są ilości bajtów (rx, tx) wszystkich portów switcha w z góry wcześniej określonym przedziale czasowym (10s). Przedział ten można zmniejszyć, ale wpływa to wtedy na dokładność pomiaru.
 
 Utworzono topologię sieci: topologia.py (z rys. niżej nr 3)
 Załadowanie topologii: sudo mn --custom topologia.py --topo mytopo --link=tc controller=remote,ip=127.0.0.1,port=6653
