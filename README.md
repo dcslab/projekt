@@ -7,14 +7,14 @@ Załadowanie topologii: sudo mn --custom topologia.py --topo mytopo --link=tc co
 
 Routing statyczny reaktywny oparty jest na utworzeniu przepływów na podstawie flowmod add (https://floodlight.atlassian.net/wiki/spaces/floodlightcontroller/pages/1343547/How+to+use+OpenFlowJ-Loxigen#HowtouseOpenFlowJ-Loxigen-FlowMods). 
 
-Ustawiając na hostach 1, 2 xtermy, uruchomione zostaly wiresharki. Zmieniając topologię jak poniżej:
-https://imgur.com/a/9YhyonT można zaobserwować:
-1) Przepływ od hostu 1 do hostu 2 (pojawiają się pakiety na host2), ale brak przepływu w drugą stronę.
+Ustawiając na hostach 1, 2 xtermy, uruchomione zostaly wiresharki. 
+
+Utworzono 3 przypadki topologii tak jak tutaj: https://imgur.com/a/9YhyonT można zaobserwować:
+1) Przepływ od hostu 1 do hostu 2 i powrót górą (łącze o większej przepustowości), ale podczas przepływu od hostu 1 do 2 dołem (łącze o mniejszej przepustowości) jedynie pojawiają się pakiety na hoscie drugim, natomiast nie wracają do 1.
 2) jw
 3) Przepływ od hostu 1 do hostu 2 i od hostu 1 do hostu 3 w obie strony.
 
-Przepływ od hostu 1 do 2 i powrót "górą". Następnie przepływ od hostu 1 do 2, ale brak powrotu (inne porty).
-https://imgur.com/a/y2yJXQ6
+Przepływ od hostu 1 do 2 i powrót "górą". Następnie przepływ od hostu 1 do 2, ale brak powrotu (inne porty) z punktu widzenia wireshark: https://imgur.com/a/y2yJXQ6
 
 PS Sprawdzałem id portów poprzez mininet>ports
 
