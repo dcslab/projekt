@@ -15,6 +15,7 @@ https://imgur.com/a/9YhyonT można zaobserwować:
 Nie wiem czemu w przypadku 3 to działa nie zmieniając nic w poniższej funkcji:
 
 Fragment kodu odpowiadający za przepływy: https://github.com/dcslab/projekt/blob/master/src/main/java/pl/edu/wat/SdnLabModule.java
+
 ------------------------------------
  @Override
     public Command receive(IOFSwitch sw, OFMessage msg, FloodlightContext cntx) {
@@ -54,6 +55,7 @@ Fragment kodu odpowiadający za przepływy: https://github.com/dcslab/projekt/bl
         //Simple Flow Add -- section
 flowAddSender.simpleAdd(sw, pin, cntx, outPort);
 }
+
 ----------------------------------
 
 Bazuje on na przepływie w jedną stronę, zamianie portów i przepływie w drugą stronę.
