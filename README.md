@@ -12,6 +12,12 @@ https://imgur.com/a/9YhyonT można zaobserwować:
 1) Przepływ od hostu 1 do hostu 2 (pojawiają się pakiety na host2), ale brak przepływu w drugą stronę.
 2) jw
 3) Przepływ od hostu 1 do hostu 2 i od hostu 1 do hostu 3 w obie strony.
+
+Przepływ od hostu 1 do 2 i powrót "górą". Następnie przepływ od hostu 1 do 2, ale brak powrotu (inne porty).
+https://imgur.com/a/y2yJXQ6
+
+PS Sprawdzałem id portów poprzez mininet>ports
+
 Nie wiem czemu w przypadku 3 to działa nie zmieniając nic w poniższej funkcji:
 
 Fragment kodu odpowiadający za przepływy: https://github.com/dcslab/projekt/blob/master/src/main/java/pl/edu/wat/SdnLabModule.java
