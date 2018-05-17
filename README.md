@@ -5,7 +5,7 @@ Poszerzony jest jedynie o bazę statystyk (https://github.com/dcslab/projekt/tre
 Utworzono topologię sieci: topologia.py (z rys. niżej nr 3)
 Załadowanie topologii: sudo mn --custom topologia.py --topo mytopo --link=tc controller=remote,ip=127.0.0.1,port=6653
 
-Routing statyczny reaktywny oparty jest na utworzeniu przepływów w oparciu o flowmod add (https://floodlight.atlassian.net/wiki/spaces/floodlightcontroller/pages/1343547/How+to+use+OpenFlowJ-Loxigen#HowtouseOpenFlowJ-Loxigen-FlowMods). 
+Routing statyczny reaktywny oparty jest na utworzeniu przepływów na podstawie flowmod add (https://floodlight.atlassian.net/wiki/spaces/floodlightcontroller/pages/1343547/How+to+use+OpenFlowJ-Loxigen#HowtouseOpenFlowJ-Loxigen-FlowMods). 
 
 Ustawiając na hostach 1, 2 xtermy, uruchomione zostaly wiresharki. Zmieniając topologię jak poniżej:
 https://imgur.com/a/9YhyonT można zaobserwować:
