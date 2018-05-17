@@ -8,6 +8,8 @@ import net.floodlightcontroller.core.module.IFloodlightService;
 import org.projectfloodlight.openflow.protocol.OFMessage;
 import org.projectfloodlight.openflow.protocol.OFPacketIn;
 import org.projectfloodlight.openflow.protocol.OFType;
+import org.projectfloodlight.openflow.protocol.match.MatchField;
+import org.projectfloodlight.openflow.types.DatapathId;
 import org.projectfloodlight.openflow.types.OFPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,26 +73,52 @@ public class SdnLabModule implements IFloodlightModule, IOFMessageListener {
     @Override
     public Command receive(IOFSwitch sw, OFMessage msg, FloodlightContext cntx) {
 
-        //Packet Out -- section
+        /*Packet Out -- section
         PacketOutSender packetOutsender = new PacketOutSender();
         packetOutsender.sendPacketOutMessage(sw);
-
-        /*
+*/
+        
         //Flow Add -- section
         OFPacketIn pin = (OFPacketIn) msg;
         OFPort outPort = OFPort.of(0);
-        if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1)) {
-            outPort = OFPort.of(2);
-        } else {
-            outPort = OFPort.of(1);
+        
+        boolean flaga = false;
+        
+       // if (sw == (DatapathId.of(1))) {
+            if (flaga == true) { 
+            	if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1)) 
+            		outPort = OFPort.of(2);
+            	else
+            		outPort = OFPort.of(1);
+            } else {
+            	if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1))
+            		outPort = OFPort.of(3);
+            	else if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(3))
+            		outPort = OFPort.of(1);
+    
+            } 
+            
+      /*  } else if (sw == (DatapathId.of(2))) {
+        	if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1)) 
+        		outPort = OFPort.of(2);
+        	else 
+        		outPort = OFPort.of(1);
+        } else if (sw == (DatapathId.of(3))) {
+        	if (pin.getMatch().get(MatchField.IN_PORT) == OFPort.of(1)) 
+        		outPort = OFPort.of(2);
+        	else 
+        		outPort = OFPort.of(1);
         }
-        FlowAddSender flowAddSender = new FlowAddSender();
         */
 
-        /*
+        
+        FlowAddSender flowAddSender = new FlowAddSender();
+        
+
+        
         //Simple Flow Add -- section
         flowAddSender.simpleAdd(sw, pin, cntx, outPort);
-        */
+        
 
         /*
         //Packet In Flow Add -- section

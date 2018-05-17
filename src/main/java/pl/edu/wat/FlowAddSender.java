@@ -3,11 +3,19 @@ package pl.edu.wat;
 import net.floodlightcontroller.core.FloodlightContext;
 import net.floodlightcontroller.core.IFloodlightProviderService;
 import net.floodlightcontroller.core.IOFSwitch;
+import net.floodlightcontroller.core.internal.IOFSwitchService;
 import net.floodlightcontroller.packet.Ethernet;
 import net.floodlightcontroller.packet.IPv4;
 import net.floodlightcontroller.packet.TCP;
 import net.floodlightcontroller.packet.UDP;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.projectfloodlight.openflow.protocol.OFFlowMod;
 import org.projectfloodlight.openflow.protocol.OFPacketIn;
+import org.projectfloodlight.openflow.protocol.action.OFAction;
+import org.projectfloodlight.openflow.protocol.action.OFActionOutput;
 import org.projectfloodlight.openflow.protocol.match.Match;
 import org.projectfloodlight.openflow.protocol.match.MatchField;
 import org.projectfloodlight.openflow.types.*;
@@ -26,22 +34,45 @@ public class FlowAddSender {
     protected static int FLOWMOD_DEFAULT_PRIORITY = 32768;
 
     private static Logger logger;
+	//private static IOFSwitchService switchService;
 
     public FlowAddSender() {
         logger = LoggerFactory.getLogger(FlowAddSender.class.getSimpleName());
     }
 
+	//IOFSwitch sw1 = switchService.getSwitch(DatapathId.of(1));
+    
     public void simpleAdd(IOFSwitch sw, OFPacketIn pin, FloodlightContext cntx, OFPort outPort) {
 
+
+    	
         //TODO: Create OFFlowMod.Builder
+    	OFFlowMod.Builder fmb = sw.getOFFactory().buildFlowAdd();
 
         //TODO: Create Match
+    	Match.Builder mb = sw.getOFFactory().buildMatch();
+    	mb.setExact(MatchField.IN_PORT, pin.getMatch().get(MatchField.IN_PORT));
+    	Match m = mb.build();
 
         //TODO: Create Actions
+    	OFActionOutput.Builder aob = sw.getOFFactory().actions().buildOutput();
+    	List<OFAction> actions = new ArrayList<OFAction>();
+    	aob.setPort(outPort);
+    	aob.setMaxLen(Integer.MAX_VALUE);
+    	actions.add(aob.build());
 
         //TODO: Bind match and actions with OFFlowMod.Builder
+    	fmb.setMatch(m).setBufferId(pin.getBufferId()).setOutPort(outPort).setPriority(FLOWMOD_DEFAULT_PRIORITY);
+    	fmb.setActions(actions);
 
         //TODO: Send FlowMod message to switch
+    	try {
+    		sw.write(fmb.build());
+    		logger.info("Flow from port {} forwarded to port {}); match: {}",
+    				new Object [] {pin.getMatch().get(MatchField.IN_PORT).getPortNumber(), outPort.getPortNumber(), m.toString()});
+    		} catch(Exception e) {
+    			logger.error("error {}", e);
+    		}
     }
 
     public void addBasedOnPacketIn(IOFSwitch sw, OFPacketIn pin, FloodlightContext cntx, OFPort outPort) {

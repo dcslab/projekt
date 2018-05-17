@@ -4,7 +4,6 @@ import net.floodlightcontroller.core.module.IFloodlightService;
 import net.floodlightcontroller.core.types.NodePortTuple;
 import org.projectfloodlight.openflow.types.DatapathId;
 import org.projectfloodlight.openflow.types.OFPort;
-
 import java.util.Map;
 
 public interface IStatisticsService extends IFloodlightService {

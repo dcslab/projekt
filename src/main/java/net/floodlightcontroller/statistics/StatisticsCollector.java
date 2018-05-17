@@ -119,6 +119,11 @@ public class StatisticsCollector implements IFloodlightModule, IStatisticsServic
 									U64.ofRaw((txBytesCounted.getValue() * BITS_PER_BYTE) / timeDifSec), 
 									pse.getRxBytes(), pse.getTxBytes())
 									);
+							//long BandWidthCons = rxBytesCounted.getValue();
+							//log.info("RX BYTES: {}" ,rxBytesCounted.getValue());
+						//	log.info("TX BYTES: {}" ,txBytesCounted.getValue());
+							//log.info("TIME: {}",timeDifSec);
+
 							
 						} else { /* initialize */
 							tentativePortStats.put(npt, SwitchPortBandwidth.of(npt.getNodeId(), npt.getPortId(), U64.ZERO, U64.ZERO, U64.ZERO, pse.getRxBytes(), pse.getTxBytes()));
@@ -158,6 +163,7 @@ public class StatisticsCollector implements IFloodlightModule, IStatisticsServic
 		@Override
 		public void run() {
 			statsReply = getSwitchStatistics(switchId, statType);
+
 		}
 	}
 	
@@ -230,7 +236,7 @@ public class StatisticsCollector implements IFloodlightModule, IStatisticsServic
 	/*
 	 * IStatisticsService implementation
 	 */
-	
+	DatapathId dpid = DatapathId.of("00:00:00:00:00:00:00:01");
 	@Override
 	public SwitchPortBandwidth getBandwidthConsumption(DatapathId dpid, OFPort p) {
 		return portStats.get(new NodePortTuple(dpid, p));
@@ -365,7 +371,7 @@ public class StatisticsCollector implements IFloodlightModule, IStatisticsServic
 				break;
 			case PORT:
 				req = sw.getOFFactory().buildPortStatsRequest()
-				.setPortNo(OFPort.ANY)
+				.setPortNo(OFPort.of(1))
 				.build();
 				break;
 			case QUEUE:
